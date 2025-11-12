@@ -284,6 +284,10 @@ class EnhancedMoELoss(nn.Module):
         # 不计算正则化损失，直接设为0
         raw_regularization = torch.tensor(0.0, device=ce_loss.device)
         actual_reg_weight = 0.0
+
+        # 当前实现中未使用的正则化项设置为零，防止未定义变量错误
+        gate_l2_reg = torch.tensor(0.0, device=ce_loss.device)
+        accuracy_bonus = torch.tensor(0.0, device=ce_loss.device)
         
         # 主损失：只使用交叉熵损失，完全不使用正则化
         total_loss = ce_loss
